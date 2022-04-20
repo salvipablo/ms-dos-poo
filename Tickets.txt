@@ -1,6 +1,7 @@
 ****  feature tickets  ****
-F#0001 - initial commit
-F#0002 - pass project to typescript
+F#0001 - initial commit.
+F#0002 - pass project to typescript.
+F#0003 - add storage class.
 
 ****  bug tickets  ****
 
