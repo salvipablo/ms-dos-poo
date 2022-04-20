@@ -3,18 +3,39 @@
 import { OperatingSystem } from "./operatingSystem.js";
 
 
+/* Class */
+
+class App {
+  op: OperatingSystem;
+
+  constructor() {
+    this.op = new OperatingSystem();
+  }
+
+  execute(): void {
+    process.stdout.write("\x1b[37mC:\\");
+
+    let comando: string;
+
+    process.stdin.on('data', (data) => {
+      
+      comando = data.toString();
+
+      if (comando.trim().toUpperCase() == "EXIT") process.exit();
+      
+      this.op.receiveCommand(comando.trim().toUpperCase());
+
+      process.stdout.write("\x1b[37mC:\\");
+    });
+  }
+}
+
+
 /* Variables */
-let comando;
-let op = new OperatingSystem();
 
-process.stdout.write("C:\\");
+let app = new App();
 
-process.stdin.on('data', function(data){
-  comando = data.toString();
 
-  op.receiveCommand(comando.trim().toUpperCase());
+/* Program */
 
-  if (comando.trim().toUpperCase() == "EXIT") process.exit();
-
-  process.stdout.write("\x1b[37mC:\\");
-});
+app.execute();

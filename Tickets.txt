@@ -7,3 +7,4 @@ F#0004 - command recognition.
 ****  bug tickets  ****
 
 ****  refactoring tickets  ****
+R#0001 - refactor index to poo.
