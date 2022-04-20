@@ -1,14 +1,13 @@
 /* Imports */
-import { Storage } from "./storage.js";
+import { OperatingSystem } from "./operatingSystem.js";
 /* Variables */
 let comando;
-let storage = new Storage();
+let op = new OperatingSystem();
 process.stdout.write("C:\\");
 process.stdin.on('data', function (data) {
     comando = data.toString();
+    op.receiveCommand(comando.trim().toUpperCase());
     if (comando.trim().toUpperCase() == "EXIT")
         process.exit();
-    if (comando.trim().toUpperCase() == "DIR")
-        console.log(storage.disk);
-    process.stdout.write("C:\\");
+    process.stdout.write("\x1b[37mC:\\");
 });
