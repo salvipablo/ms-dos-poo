@@ -9,12 +9,14 @@ class App {
     execute() {
         process.stdout.write("\x1b[37mC:\\");
         let comando;
+        let pathShow;
         process.stdin.on('data', (data) => {
             comando = data.toString();
             if (comando.trim().toUpperCase() == "EXIT")
                 process.exit();
-            this.op.receiveCommand(comando.trim().toUpperCase());
-            process.stdout.write("\x1b[37mC:\\");
+            this.op.receiveCommand(comando.trim());
+            pathShow = "\x1b[37m" + this.op.getPath();
+            process.stdout.write(pathShow);
         });
     }
 }

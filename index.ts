@@ -16,6 +16,7 @@ class App {
     process.stdout.write("\x1b[37mC:\\");
 
     let comando: string;
+    let pathShow: string;
 
     process.stdin.on('data', (data) => {
       
@@ -23,9 +24,10 @@ class App {
 
       if (comando.trim().toUpperCase() == "EXIT") process.exit();
       
-      this.op.receiveCommand(comando.trim().toUpperCase());
+      this.op.receiveCommand(comando.trim());
 
-      process.stdout.write("\x1b[37mC:\\");
+      pathShow = "\x1b[37m" + this.op.getPath();
+      process.stdout.write(pathShow);
     });
   }
 }

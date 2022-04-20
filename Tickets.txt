@@ -4,7 +4,7 @@ F#0002 - pass project to typescript.
 F#0003 - add storage class.
 F#0004 - command recognition.
 F#0005 - add dir command.
-
+F#0006 - add cd command.
 
 ****  bug tickets  ****
 
