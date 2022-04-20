@@ -1,5 +1,6 @@
 ****  feature tickets  ****
 F#0001 - initial commit
+F#0002 - pass project to typescript
 
 ****  bug tickets  ****
 
