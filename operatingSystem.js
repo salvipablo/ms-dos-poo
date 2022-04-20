@@ -4,9 +4,17 @@ import { Storage } from "./storage.js";
 export class OperatingSystem {
     storage;
     commands;
+    currentDirectory;
     constructor() {
         this.storage = new Storage();
         this.commands = ["DIR", "CD", "DIRECTORY", "CD..", "MKDIR"];
+        this.currentDirectory = {
+            id: 0,
+            sonOf: 0,
+            name: "C",
+            type: "DIR",
+            size: 0
+        };
     }
     receiveCommand(command) {
         let parts = command.split(" ");
@@ -27,6 +35,14 @@ export class OperatingSystem {
             console.log('\x1b[31m', message);
     }
     CommandDir() {
-        console.log(this.storage.disk);
+        let currentDirectoryId = this.currentDirectory.id;
+        let currentDirectoryOrFileName = this.currentDirectory.name;
+        this.storage.disk.forEach(element => {
+            if (currentDirectoryId == element.sonOf &&
+                currentDirectoryOrFileName != element.name) {
+                let nameRell = element.name.padEnd(25, ' ');
+                console.log(`${nameRell}     ${element.type == "DIR" ? "<DIR>" : element.type}`);
+            }
+        });
     }
 }

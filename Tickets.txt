@@ -3,8 +3,11 @@ F#0001 - initial commit.
 F#0002 - pass project to typescript.
 F#0003 - add storage class.
 F#0004 - command recognition.
+F#0005 - add dir command.
+
 
 ****  bug tickets  ****
+
 
 ****  refactoring tickets  ****
 R#0001 - refactor index to poo.

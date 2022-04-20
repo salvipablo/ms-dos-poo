@@ -1,16 +1,25 @@
 /* Imports */
 
 import { Storage } from "./storage.js";
-
+import { fileOrDirectory } from "./types.js";
 
 /* Clase */
 
 export class OperatingSystem {
   storage: Storage;
   commands: any;
+  currentDirectory: fileOrDirectory;
   constructor() {
     this.storage = new Storage();
     this.commands =  ["DIR", "CD", "DIRECTORY", "CD..", "MKDIR"];
+
+    this.currentDirectory = {
+      id: 0,
+      sonOf: 0,
+      name: "C", 
+      type: "DIR",
+      size: 0
+    }
   }
 
   receiveCommand(command: string): void {
@@ -32,6 +41,15 @@ export class OperatingSystem {
   }
 
   CommandDir(): void {
-    console.log(this.storage.disk);
+    let currentDirectoryId: number = this.currentDirectory.id;
+    let currentDirectoryOrFileName: string = this.currentDirectory.name;
+
+    this.storage.disk.forEach(element => {
+      if (currentDirectoryId == element.sonOf && 
+        currentDirectoryOrFileName != element.name) {
+          let nameRell = element.name.padEnd(25, ' ')
+          console.log(`${nameRell}     ${element.type == "DIR" ? "<DIR>":element.type}`)
+      }
+    });
   }
 }

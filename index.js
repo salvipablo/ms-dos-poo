@@ -6,9 +6,6 @@ class App {
     constructor() {
         this.op = new OperatingSystem();
     }
-    pressEnter(comando) {
-        this.op.receiveCommand(comando.trim().toUpperCase());
-    }
     execute() {
         process.stdout.write("\x1b[37mC:\\");
         let comando;
@@ -17,7 +14,6 @@ class App {
             if (comando.trim().toUpperCase() == "EXIT")
                 process.exit();
             this.op.receiveCommand(comando.trim().toUpperCase());
-            //this.pressEnter(comando);
             process.stdout.write("\x1b[37mC:\\");
         });
     }
