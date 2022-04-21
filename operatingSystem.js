@@ -6,6 +6,7 @@ export class OperatingSystem {
     commands;
     currentDirectory;
     path;
+    maxCurrentId;
     constructor() {
         this.storage = new Storage();
         this.commands = ["DIR", "CD", "DIRECTORY", "CD..", "MKDIR"];
@@ -19,6 +20,7 @@ export class OperatingSystem {
         this.path = [
             { id: 0, sonOf: 0, name: "C", type: "DIR", size: 0 }
         ];
+        this.maxCurrentId = 9;
     }
     receiveCommand(command) {
         let parts = command.split(" ");
@@ -31,9 +33,12 @@ export class OperatingSystem {
                 this.CommandDir();
             if (parts[0] == "CD")
                 this.enterDirectory(parts[1]);
-            // if (parts[0] == "directory") console.log(diskData.disk);
-            // if (parts[0] == "mkdir") createDirectory(parts[1]);
-            // if (parts[0] == "cd..") exitDirectory();
+            if (parts[0] == "CD..")
+                this.exitDirectory();
+            if (parts[0] == "MKDIR")
+                this.createDirectory(parts[1]);
+            if (parts[0] == "DIRECTORY")
+                console.log(this.storage.disk);
         }
     }
     informationMessages(type, message) {
@@ -74,5 +79,24 @@ export class OperatingSystem {
             html += `${element.name == "C" ? "C:" : element.name}\\`;
         });
         return html;
+    }
+    exitDirectory() {
+        if (this.path.length > 1) {
+            this.path.pop();
+            this.getPath();
+            this.currentDirectory = this.path[this.path.length - 1];
+        }
+    }
+    createDirectory(nameDirectory) {
+        let sonOF = this.currentDirectory.id;
+        this.maxCurrentId += 1;
+        let newDirectory = {
+            id: this.maxCurrentId,
+            sonOf: sonOF,
+            name: nameDirectory,
+            type: "DIR",
+            size: 0
+        };
+        this.storage.disk.push(newDirectory);
     }
 }
